@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="hr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102b49"><title>Izbori u Srbiji 2026</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eaf0f6;color:#142b43;font:16px Arial,sans-serif}.wrap{max-width:950px;margin:auto;padding:16px}header{background:linear-gradient(120deg,#102b49,#245a86);color:white;padding:24px;border-radius:0 0 18px 18px}h1{font-size:clamp(28px,6vw,46px);margin:8px 0}.flag{float:right;font-size:48px}.muted{color:#60758b;font-size:13px;line-height:1.5}.card{background:white;border:1px solid #d7e1eb;border-radius:15px;padding:18px;margin:14px 0}.row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.tile{background:#102b49;color:white;text-align:center;padding:14px 2px;border-radius:10px}.tile:first-child{background:#b51f35}.tile strong{display:block;font-size:clamp(24px,6vw,42px)}.tile small{font-size:11px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid .card{margin:0}.big{font-size:clamp(27px,5vw,40px);font-weight:bold;color:#102b49}label{display:block;margin:10px 0 5px;font-size:13px;font-weight:bold}input{width:100%;padding:10px;border:1px solid #bdcddd;border-radius:8px;font:inherit}button{padding:11px 14px;border:0;border-radius:8px;background:#102b49;color:white;font-weight:bold;margin-top:10px;cursor:pointer}.result{background:#edf3f9;padding:12px;border-radius:9px;margin-top:12px;line-height:1.5}.notice{background:#fff8e6;border-left:4px solid #d5a53b;padding:11px;font-size:13px;line-height:1.5}.news{padding:12px 0;border-bottom:1px solid #d7e1eb}.news:last-child{border:0}.news a{font-weight:bold;color:#174d7a;text-decoration:none}.news p{margin:5px 0;font-size:13px;color:#60758b;line-height:1.45}a{color:#174d7a}.chamber{width:100%;height:auto;display:block;max-height:390px}.seat-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.legend-item{display:flex;align-items:center;gap:7px;font-size:13px;padding:7px;background:#f3f6fa;border-radius:7px}.swatch{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}.seat-summary{display:flex;gap:8px;flex-wrap:wrap}.seat-summary span{background:#edf3f9;padding:7px 10px;border-radius:8px;font-size:13px}table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}td,th{text-align:left;padding:8px;border-bottom:1px solid #d7e1eb}td:last-child,th:last-child{text-align:right}.sources{display:flex;flex-wrap:wrap;gap:8px}.sources a{background:#edf3f9;padding:10px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:13px}@media(max-width:650px){.grid{grid-template-columns:1fr}.row{gap:5px}.tile{padding:11px 1px}}
+</style></head><body><header><div class="wrap"><span class="flag">🇷🇸</span><div style="font-size:11px;letter-spacing:.15em">IZBORNI CENTAR · 2026.</div><h1>IZBORI U SRBIJI</h1><div>25. listopada 2026. · 7:00 sati</div><p>Parlamentarni izbori · 250 mandata</p></div></header>
+<main class="wrap">
+<section class="card" id="count"><h2>⏳ Odbrojavanje do početka glasanja</h2><div class="row"><div class="tile"><strong id="d">—</strong><small>DANA</small></div><div class="tile"><strong id="h">—</strong><small>SATI</small></div><div class="tile"><strong id="m">—</strong><small>MINUTA</small></div><div class="tile"><strong id="s">—</strong><small>SEKUNDI</small></div></div><p id="th" class="muted"></p></section>
+<div class="grid">
+<section class="card"><h2>👥 Birački popis</h2><div class="big">6.450.523</div><p class="muted">Ukupan broj birača prema odluci RIK-a, stanje na 9. listopada 2026.</p><p>Broj mandata: <b>250</b><br>Opći izborni prag: <b>3%</b></p><p class="muted">Manjinske liste imaju poseban zakonski tretman.</p><a href="https://www.rik.parlament.gov.rs/vest/sr/720639/52-sednica-republicke-izborne-komisije.php" target="_blank">Službena odluka RIK-a ↗</a></section>
+<section class="card"><h2>📊 Kalkulator izlaznosti</h2><div class="notice">Prije otvaranja birališta stvarna izlaznost još nije poznata. Unesi objavljeni postotak.</div><label for="turnout">Izlaznost (%)</label><input id="turnout" type="number" min="0" max="100" step=".1" placeholder="Npr. 42,5"><button onclick="calcTurnout()">Izračunaj broj birača</button><div class="result" id="tr">Procijenjeni broj birača prikazat će se ovdje.</div></section>
+</div>
+<section class="card"><h2>🏛️ Kalkulator mandata — D’Hondt</h2><p class="muted">Unesi glasove za do šest lista. Simulacija primjenjuje prag od 3% i raspoređuje 250 mandata među listama iznad praga. Nije službeni rezultat; manjinski ponder nije uključen.</p><div class="grid" id="lists"></div><button onclick="calcSeats()">Preračunaj mandate</button><p class="muted">Grafika se automatski ažurira dok mijenjaš nazive lista ili broj glasova. Svaka točka predstavlja jedno od 250 zastupničkih mjesta.</p><div class="card" style="margin:12px 0;background:#fbfdff"><h3 style="margin-top:0">🏛️ Sabor u 250 mjesta</h3><div class="seat-summary" id="seatSummary"><span>250 mjesta</span><span>Većina: 126</span></div><svg id="chamber" class="chamber" viewBox="0 0 600 330" role="img" aria-label="Grafički prikaz 250 zastupničkih mjesta"></svg><div class="seat-legend" id="seatLegend"></div></div><div class="result" id="sr">Unesi glasove; raspodjela mandata i grafika izračunat će se automatski.</div></section>
+
+<section class="card" id="rezultati-uzivo"><h2>🗳️ Rezultati uživo — službeni RIK</h2>
+<p class="muted">Ovaj odjeljak prikazuje službenu stranicu Republičke izborne komisije (RIK), na kojoj se objavljuju obrađena biračka mjesta, izlaznost i glasovi po listama. Prikaz se pokušava osvježiti svakih 5 minuta.</p>
+<div class="notice"><b>Važno:</b> Ovo je službeni izvor, ali RIK ne potvrđuje javno dostupan API za izravan prijenos podataka u ovu stranicu. Zato ne izmišljamo brojke niti ih automatski prepisujemo. Ako se ugrađeni prozor ne prikaže zbog sigurnosnih postavki RIK-a, otvori rezultate izravno preko gumba ispod.</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0"><a href="https://www.rik.parlament.gov.rs/542645/sr/rezultati" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#102b49;color:#fff;padding:11px 14px;border-radius:8px;text-decoration:none;font-weight:bold">Otvori službene rezultate RIK-a ↗</a><a href="https://podatak.rs/izbori-2026/" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#edf3f9;padding:11px 14px;border-radius:8px;text-decoration:none;font-weight:bold">Nezavisni pregled podataka RIK-a ↗</a></div>
+<div class="card" style="background:#f7faff;margin-top:12px"><h3 style="margin-top:0">Gdje pratiti rezultate</h3><p><b>Službeni izvor:</b> RIK objavljuje obrađena biračka mjesta, izlaznost i glasove po listama.</p><p><b>Neovisna vizualizacija:</b> podatak.rs prikazuje rezultate po općinama i biračkim mjestima te navodi vrijeme posljednjeg preuzimanja podataka.</p><p class="muted">Ova stranica ne preuzima automatski brojke s tih portala. Otvaranje poveznica prikazuje izvorne podatke, bez rizika da se zastarjeli ili nepotvrđeni brojevi predstave kao rezultati uživo.</p><div class="seat-summary"><a href="https://www.rik.parlament.gov.rs/542645/sr/rezultati" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#102b49;color:#fff;padding:11px 14px;border-radius:8px;text-decoration:none;font-weight:bold">Otvori RIK ↗</a><a href="https://podatak.rs/izbori-2026/" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#edf3f9;padding:11px 14px;border-radius:8px;text-decoration:none;font-weight:bold">Otvori podatak.rs ↗</a><a href="https://izbori2026.rs/" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#edf3f9;padding:11px 14px;border-radius:8px;text-decoration:none;font-weight:bold">Još jedan pregled ↗</a></div></div>
+</section>
+
+<section class="card" id="livefeed"><h2>📰 Najnovije izborne vijesti</h2>
+<p class="muted">Automatski pregled naslova iz RSS izvora medija na srpskom jeziku. Naslov i poveznica vode na izvorni članak; tekstovi se ne kopiraju na ovaj portal.</p>
+<div class="notice">Naslovi se dohvaćaju iz javnih RSS izvora preko vanjskog posrednika. Dostupnost ovisi o izdavačima i posredničkoj usluzi; ovo nije službeni popis svih objavljenih članaka.</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" id="refreshNews">Osvježi vijesti</button><label style="display:flex;gap:7px;align-items:center;font-weight:normal;margin:10px 0"><input type="checkbox" id="autoNews" checked style="width:auto"> Automatski osvježavaj svakih 30 min</label></div>
+<p id="newsStatus" class="muted" aria-live="polite">Učitavanje najnovijih vijesti…</p><div id="liveNews"><p class="muted">Trenutak, učitavam vijesti…</p></div>
+<p class="muted">Ako se vijesti ne učitaju, otvori <a href="https://news.google.com/search?q=%28site%3An1info.rs%20OR%20site%3Anova.rs%20OR%20site%3Avreme.com%20OR%20site%3Abbc.com%2Fserbian%20OR%20site%3Abalkans.aljazeera.net%29%20Srbija%20%28izbori%20OR%20izlaznost%29&hl=sr&gl=RS&ceid=RS%3Asr" target="_blank" rel="noopener">pretragu izbornih vijesti na Google Newsu ↗</a>.</p>
+</section>
+
+<section class="card" id="news"><h2>🔎 Još izvora i arhiva</h2><p class="muted">Izravne poveznice na medije i arhive. Sadržaj se čita na izvornim portalima.</p>
+<div class="news"><a href="https://n1info.rs/vesti/republicka-izborna-komisija-broj-biraca-srbija-2026/" target="_blank">N1 Srbija — RIK utvrdio broj birača</a><p>RIK je objavio 6.450.523 birača; u izvještaju se otvaraju i pitanja točnosti biračkog popisa.</p></div>
+<div class="news"><a href="https://nova.rs/vesti/politika/istrazivanja-kazu-da-je-samo-izlaznost-veca-od-63-odsto-kljuc-za-izbore-u-nedelju-kao-magicna-brojka-pominje-se-43-miliona-evo-kako-je-bilo-na-izborima-2023/" target="_blank">Nova.rs — Izlaznost i izborni scenariji</a><p>Analiza objavljena 20. listopada o tome kako različiti scenariji izlaznosti mogu utjecati na raspodjelu snaga.</p></div>
+<div class="news"><a href="https://vreme.com/izbori-2026/" target="_blank">Vreme — Izbori 2026.</a><p>Tematska stranica s izvještajima o kampanji, izbornim uvjetima i političkim akterima.</p></div>
+<div class="news"><a href="https://bbc.com.im/serbian/lat" target="_blank">BBC na srpskom — Izbori u Srbiji 2026.</a><p>Vodiči kroz liste, aktere, financiranje kampanje i ulogu manjinskih stranaka.</p></div>
+<div class="news"><a href="https://balkans.aljazeera.net/teme/2026/10/13/u-kakvim-uvjetima-srbija-izlazi-na-biralista" target="_blank">Al Jazeera Balkans — U kakvim uvjetima Srbija izlazi na birališta</a><p>Pregled političkog okruženja, medijskog prostora, biračkog popisa i nalaza ODIHR-a.</p></div>
+<div class="news"><a href="https://balkans.aljazeera.net/news/balkan/2026/10/19/izborne-nepravilnosti-pod-lupom-od-bugarskog-voza-do-izbornog-turizma" target="_blank">Al Jazeera Balkans — Izborne nepravilnosti pod lupom</a><p>Vodič kroz navode o nepravilnostima, nalaze posmatrača i načine prijave.</p></div>
+<div class="news"><a href="https://nova.rs/tag/izbori-2026/" target="_blank">Nova.rs — Sve vijesti: izbori 2026.</a><p>Tematska arhiva vijesti, videa i izvještaja s terena.</p></div>
+<div class="news"><a href="https://www.rik.parlament.gov.rs/tekst/sr/101175/broj-overenih-izjava-biraca.php" target="_blank">RIK — Proglašene izborne liste</a><p>Službeni popis lista i ovjerenih izjava birača.</p></div></section>
+<section class="card"><h2>📡 Prati izvore</h2><div class="sources"><a href="https://n1info.rs/" target="_blank">N1 Srbija ↗</a><a href="https://nova.rs/tag/izbori-2026/" target="_blank">Nova.rs ↗</a><a href="https://vreme.com/izbori-2026/" target="_blank">Vreme ↗</a><a href="https://bbc.com.im/serbian/lat" target="_blank">BBC na srpskom ↗</a><a href="https://balkans.aljazeera.net/" target="_blank">Al Jazeera Balkans ↗</a><a href="https://www.rik.parlament.gov.rs/" target="_blank">RIK — službeni rezultati ↗</a><a href="https://izbori2026.rs/" target="_blank" rel="noopener noreferrer">Neovisni pregled rezultata ↗</a></div><p class="muted">Stranica sadrži odabrane poveznice, ne automatski prijenos svih vijesti s tih portala.</p></section>
+</main><script>
+const target=new Date("2026-10-25T07:00:00+01:00").getTime();function tick(){let x=Math.max(0,target-Date.now());d.textContent=Math.floor(x/86400000);h.textContent=String(Math.floor(x/3600000)%24).padStart(2,"0");m.textContent=String(Math.floor(x/60000)%60).padStart(2,"0");s.textContent=String(Math.floor(x/1000)%60).padStart(2,"0");th.textContent=x?Math.floor(x/3600000).toLocaleString("hr-HR")+" sati ukupno preostalo":"Glasanje je počelo";}tick();setInterval(tick,1000);
+function fmt(n){return Math.round(n).toLocaleString("hr-HR")}function calcTurnout(){let p=Number(document.getElementById("turnout").value);if(!Number.isFinite(p)||p<0||p>100){tr.textContent="Unesi postotak između 0 i 100.";return}tr.innerHTML="<b>"+p.toLocaleString("hr-HR")+"% ≈ "+fmt(6450523*p/100)+" birača</b><br><small>Procjena prema ukupno 6.450.523 upisanih birača.</small>"}
+const defaults=[["Ujedinjena Srbija",2100000],["Studentska lista",1900000],["SPS – Faktor stabilnosti",300000],["Evropska Srbija",250000],["Lista 5",100000],["Lista 6",50000]];
+lists.innerHTML=defaults.map((a,i)=>'<div><label for="n'+i+'">Naziv liste '+(i+1)+'</label><input id="n'+i+'" value="'+a[0]+'"><label for="v'+i+'">Broj glasova</label><input id="v'+i+'" type="number" min="0" value="'+a[1]+'"></div>').join("");
+function attachSeatAutoUpdate(){for(let i=0;i<defaults.length;i++){document.getElementById('n'+i).addEventListener('input',calcSeats);document.getElementById('v'+i).addEventListener('input',calcSeats)}}
+function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const partyColors=['#255f85','#bd3545','#d69e2e','#4f8b68','#7b61a8','#db7844'];
+function calcSeats(){
+ let a=defaults.map((x,i)=>({name:document.getElementById('n'+i).value.trim()||('Lista '+(i+1)),votes:Math.max(0,Number(document.getElementById('v'+i).value)||0),seats:0,color:partyColors[i]}));
+ let total=a.reduce((sum,x)=>sum+x.votes,0);const svg=document.getElementById('chamber'),legend=document.getElementById('seatLegend'),summary=document.getElementById('seatSummary');
+ if(!total){document.getElementById('sr').textContent='Unesi barem jedan pozitivan broj glasova.';svg.innerHTML='';legend.innerHTML='';summary.innerHTML='<span>250 mjesta</span><span>Većina: 126</span>';return}
+ let ok=a.filter(x=>x.votes/total>=.03),no=a.filter(x=>x.votes/total<.03);
+ if(!ok.length){document.getElementById('sr').textContent='Nijedna lista nije prešla prag od 3%.';svg.innerHTML='';legend.innerHTML='';return}
+ for(let i=0;i<250;i++){let best=ok[0];for(let x of ok)if(x.votes/(x.seats+1)>best.votes/(best.seats+1))best=x;best.seats++}
+ const seated=[...ok].sort((a,b)=>b.seats-a.seats);let dots='';
+ // 10 semicircular rows of 25 dots: all 250 seats are visible.
+ const seatOrder=[];for(const party of seated){for(let k=0;k<party.seats;k++)seatOrder.push(party)}
+ let seatIndex=0;for(let row=0;row<10;row++){let count=25;let radius=72+row*22,cx=300,cy=278;for(let j=0;j<count;j++){let angle=Math.PI+(Math.PI*j/(count-1));let x=cx+radius*Math.cos(angle),y=cy+radius*Math.sin(angle);let party=seatOrder[seatIndex];dots+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.1" fill="${party?party.color:'#cbd5df'}" stroke="#fff" stroke-width="1"><title>${party?esc(party.name):'Mjesto'} — mjesto ${seatIndex+1}</title></circle>`;seatIndex++;}}
+ svg.innerHTML='<path d="M 83 278 A 217 217 0 0 1 517 278" fill="none" stroke="#d7e1eb" stroke-width="2"/>'+dots+'<text x="300" y="315" text-anchor="middle" fill="#102b49" font-size="16" font-weight="bold">250 zastupničkih mjesta</text>';
+ summary.innerHTML='<span><b>250</b> mjesta ukupno</span><span><b>126</b> za većinu</span><span>'+ (seated[0]?esc(seated[0].name)+': <b>'+seated[0].seats+'</b>':'')+'</span>';
+ legend.innerHTML=seated.map(x=>'<div class="legend-item"><i class="swatch" style="background:'+x.color+'"></i><span>'+esc(x.name)+' — <b>'+x.seats+'</b> mandata ('+(100*x.seats/250).toFixed(1).replace('.',',')+'%)</span></div>').join('');
+ seated.sort((a,b)=>b.seats-a.seats);
+ document.getElementById('sr').innerHTML='<b>Simulacija raspodjele 250 mandata</b><table><tr><th>Lista</th><th>Glasovi</th><th>Udio</th><th>Mandati</th></tr>'+seated.map(x=>'<tr><td><span class="swatch" style="background:'+x.color+';vertical-align:middle;margin-right:5px"></span>'+esc(x.name)+'</td><td>'+fmt(x.votes)+'</td><td>'+(100*x.votes/total).toFixed(2).replace('.',',')+'%</td><td><b>'+x.seats+'</b></td></tr>').join('')+'</table><p class="muted">Ispod praga: '+(no.length?no.map(x=>esc(x.name)).join(', '):'nijedna')+'. Simulacija koristi D’Hondtov sustav, 3% prag i glasove koje si unio. Ne povlači automatski službene rezultate; ne uključuje poseban zakonski tretman manjinskih lista.</p>';
+}
+
+
+attachSeatAutoUpdate();calcSeats();
+
+// Automatski RSS pregled iz više izdavačkih izvora; naslovi vode na izvorne članke.
+const feeds=[
+ {name:'BBC Srbija',url:'https://feeds.bbci.co.uk/news/topics/c8nq32jw8yjt/rss.xml'},
+ {name:'DW na srpskom',url:'https://rss.dw.com/xml/rss-sr-all'},
+ {name:'Nova.rs',url:'https://nova.rs/feed/'},
+ {name:'N1 Srbija',url:'https://n1info.rs/feed/'},
+ {name:'Politika',url:'https://www.politika.rs/rss'}
+];
+let newsTimer=null;
+function safeText(value){return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function setNewsTimer(){if(newsTimer)clearInterval(newsTimer);if(document.getElementById('autoNews').checked)newsTimer=setInterval(loadNews,30*60*1000);}
+function textOf(node,tag){const el=node.getElementsByTagName(tag)[0];return el?(el.textContent||'').trim():'';}
+function parseFeed(xml,source){
+ const doc=new DOMParser().parseFromString(xml,'text/xml');
+ if(doc.querySelector('parsererror'))throw new Error('Neispravan RSS/XML');
+ let nodes=[...doc.getElementsByTagName('item')];
+ if(!nodes.length)nodes=[...doc.getElementsByTagName('entry')];
+ return nodes.map(n=>{
+   let link=textOf(n,'link');
+   if(!link){const le=n.getElementsByTagName('link')[0];if(le)link=le.getAttribute('href')||'';}
+   const title=textOf(n,'title');
+   const date=textOf(n,'pubDate')||textOf(n,'published')||textOf(n,'updated');
+   const desc=textOf(n,'description')||textOf(n,'summary');
+   return {title,link,date,desc,source};
+ }).filter(x=>x.title&&/^https?:\/\//i.test(x.link));
+}
+async function getFeed(feed){
+ // Primary: CORS proxy for public RSS; fallback: RSS-to-JSON converter for this publisher only.
+ const proxy='https://proxy.cors.dev/'+feed.url;
+ try{
+   const r=await fetch(proxy,{cache:'no-store'});if(!r.ok)throw new Error('proxy '+r.status);
+   const xml=await r.text();const parsed=parseFeed(xml,feed.name);if(parsed.length)return parsed;
+ }catch(e){}
+ const endpoint='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feed.url);
+ const r=await fetch(endpoint,{cache:'no-store'});if(!r.ok)throw new Error(feed.name+': HTTP '+r.status);
+ const data=await r.json();if(data.status!=='ok'||!Array.isArray(data.items))throw new Error(feed.name+': RSS nedostupan');
+ return data.items.map(x=>({title:x.title||'',link:x.link||'',date:x.pubDate||'',desc:x.description||'',source:feed.name})).filter(x=>x.title&&/^https?:\/\//i.test(x.link));
+}
+async function loadNews(){
+ const status=document.getElementById('newsStatus'),target=document.getElementById('liveNews');
+ status.textContent='Dohvaćam naslove iz više izvora…';
+ try{
+   const results=await Promise.allSettled(feeds.map(getFeed));
+   let items=results.filter(r=>r.status==='fulfilled').flatMap(r=>r.value);
+   const failed=results.filter(r=>r.status==='rejected').length;
+   const seen=new Set();items=items.filter(x=>{const k=x.link||x.title;if(seen.has(k))return false;seen.add(k);return true;});
+   const terms=/izbor|izlaznost|birač|birac|glasanj|glasova|izborna|izborni|parlament|student|vučić|vucic|opozicij|skupštin|skupstin|predizborn|kampanj/i;
+   const election=items.filter(x=>terms.test(x.title+' '+x.desc));
+   // Prefer election-related headlines; if publishers currently have none, show the latest general headlines.
+   items=(election.length?election:items).sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0,25);
+   if(!items.length)throw new Error('Trenutačno nije dostupan nijedan RSS izvor.');
+   target.innerHTML=items.map(item=>{
+     let date='';if(item.date){const dt=new Date(item.date);if(!Number.isNaN(dt.getTime()))date=dt.toLocaleString('hr-HR',{dateStyle:'medium',timeStyle:'short'});}
+     return '<article class="news"><a href="'+safeText(item.link)+'" target="_blank" rel="noopener noreferrer">'+safeText(item.title)+' ↗</a><p>'+safeText(item.source)+(date?' · '+safeText(date):'')+'</p></article>';
+   }).join('');
+   status.textContent='Ažurirano: '+new Date().toLocaleString('hr-HR')+' · prikazano '+items.length+' naslova'+(election.length?' povezanih s izborima':'')+'.'+(failed?(' '+failed+' izvora trenutačno nije odgovorilo.'):'');
+ }catch(error){
+   status.textContent='Automatski dohvat trenutačno nije uspio.';
+   target.innerHTML='<p class="muted">RSS usluge ponekad privremeno ne odgovaraju. Pokušaj ponovno ili otvori <a href="https://www.google.com/search?q=izbori+Srbija+najnovije+vijesti" target="_blank" rel="noopener">pretragu najnovijih vijesti o izborima ↗</a>.</p>';
+ }
+}
+document.getElementById('refreshNews').addEventListener('click',loadNews);
+document.getElementById('autoNews').addEventListener('change',setNewsTimer);
+loadNews();setNewsTimer();
+
+
+
+</script>
+<!-- Mali brojač posjeta u desnom kutu. Brojanje obrađuje vanjska usluga myhits.vercel.app. -->
+<style>
+#visitor-counter{position:fixed;right:10px;bottom:82px;z-index:9999;display:flex;align-items:center;justify-content:center;padding:5px 7px;background:rgba(255,255,255,.94);border:1px solid #d6e0ea;border-radius:10px;box-shadow:0 2px 10px rgba(16,43,73,.16);line-height:0;max-width:120px}
+#visitor-counter img{display:block;width:auto;height:20px;max-width:108px}
+@media(min-width:700px){#visitor-counter{bottom:18px}}
+</style>
+<a id="visitor-counter" href="https://myhits.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Brojač posjeta stranici (vanjska usluga)">
+<img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fizbori-srbija-2026.netlify.app?color=blue&label=posjeta&size=small" alt="Brojač posjeta" loading="eager">
+</a>
+</body></html>
